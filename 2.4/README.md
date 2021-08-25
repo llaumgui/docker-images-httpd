@@ -1,6 +1,10 @@
 # Alpine Apache HTTPd 2.4
 
-[![Docker Pulls](https://img.shields.io/docker/pulls/llaumgui/httpd.svg)](https://hub.docker.com/r/llaumgui/httpd/) [![](https://images.microbadger.com/badges/image/llaumgui/httpd.svg)](https://microbadger.com/images/llaumgui/httpd "Get your own image badge on microbadger.com") [![](https://images.microbadger.com/badges/version/llaumgui/httpd.svg)](https://microbadger.com/images/llaumgui/httpd "Get your own version badge on microbadger.com") [![](https://images.microbadger.com/badges/commit/llaumgui/httpd.svg)](https://microbadger.com/images/llaumgui/httpd "Get your own commit badge on microbadger.com")  [![](https://img.shields.io/github/last-commit/llaumgui/docker-images.svg)](https://github.com/llaumgui/docker-images)
+[![Author][ico-twitter]][link-twitter]
+[![Build Status][ico-ghactions]][link-ghactions]
+[![Docker Pull][ico-docker]][link-docker]
+[![Latest Version][ico-version]][link-docker]
+[![Software License][ico-license]](LICENSE)
 
 An Apache HTTPd 2.4 image forked from offical [repository](https://store.docker.com/images/httpd).
 
@@ -45,3 +49,12 @@ You can use this container in a docker-compose.yml file:
      - "80:80"
      - "443:443"
 ~~~
+
+[ico-twitter]: https://img.shields.io/static/v1?label=Author&message=llaumgui&color=50ABF1&logo=twitter&style=flat-square
+[link-twitter]: https://twitter.com/llaumgui
+[ico-docker]: https://img.shields.io/docker/pulls/llaumgui/httpd?color=%2496ed&logo=docker&style=flat-square
+[link-docker]: https://hub.docker.com/repository/docker/llaumgui/httpd
+[ico-ghactions]: https://img.shields.io/github/workflow/status/llaumgui/docker-images-httpd/Docker%20Image%20CI?style=flat-square&logo=github&label=CI/CD
+[link-ghactions]: https://github.com/llaumgui/docker-images-httpd/actions
+[ico-version]: https://img.shields.io/docker/v/llaumgui/httpd?sort=semver&color=%2496ed&logo=docker&style=flat-square
+[ico-license]: https://img.shields.io/github/license/llaumgui/docker-images-httpd?style=flat-square

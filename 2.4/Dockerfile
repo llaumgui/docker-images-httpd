@@ -2,12 +2,13 @@
 # official HTTPd docker repository.
 # @see: https://store.docker.com/images/httpd
 FROM httpd:2.4-alpine
-MAINTAINER Guillaume Kulakowski <guillaume@kulakowski.fr>
 
-LABEL Description="Fork of httpd:2.4-alpine"
-LABEL Vendor="Guillaume Kulakowski"
-LABEL License="MIT"
-LABEL Version=2.4-alpine
+LABEL org.opencontainers.image.title="llaumgui/httpd"
+LABEL org.opencontainers.image.description="Fork of httpd:2.4-alpine"
+LABEL org.opencontainers.image.vendor="Guillaume Kulakowski"
+LABEL org.opencontainers.image.authors="guillaume@kulakowski.fr"
+LABEL org.opencontainers.image.licenses="MIT"
+LABEL org.opencontainers.image.version="2.4"
 
 # Enable some modules.
 RUN sed -i 's@^#LoadModule deflate_module modules/mod_deflate.so@LoadModule deflate_module modules/mod_deflate.so@g' /usr/local/apache2/conf/httpd.conf && \
