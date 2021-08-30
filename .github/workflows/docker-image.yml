@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Docker image CI CD
 
 on:
   schedule:
@@ -17,11 +17,54 @@ env:
 jobs:
 
   ##############################################################################
+  # Dockerfile tests job
+  #
+  test_dockerfiles:
+    runs-on: ubuntu-latest
+    name: QA for Dockerfile
+
+    strategy:
+      fail-fast: false
+      matrix:
+        httpd-version: [2.4]
+
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+
+  ##############################################################################
+  # markdownlint tests job
+  #
+  test_markdownlint:
+    runs-on: ubuntu-latest
+    name: QA for Markdown files
+
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    - name: markdownlint-cli
+      uses: nosborn/github-action-markdown-cli@v2.0.0
+      with:
+        files: "*.md */*.md"
+        config_file: ".markdownlint.yaml"
+
+
+  ##############################################################################
   # Build job
   #
-  build:
+  build_deploy:
+    needs: [
+      test_dockerfiles,
+      test_markdownlint
+    ]
     runs-on: ubuntu-latest
-    name: Build docker image
+    name: Build and deploy docker image
 
     strategy:
       fail-fast: false

@@ -1,17 +1,16 @@
+# httpd Docker images
+
 [![Author][ico-twitter]][link-twitter]
 [![Build Status][ico-ghactions]][link-ghactions]
 [![Docker Pull][ico-docker]][link-docker]
 [![Latest Version][ico-version]][link-docker]
 [![Software License][ico-license]](LICENSE)
 
-
-# httpd Docker images
-
 Repository with my httpds Dockerfile for my Docker/Podman images.
 
 ## Usage from Docker Hub
 
-```
+```bash
 docker pull llaumgui/httpd
 ```
 
@@ -19,7 +18,7 @@ And see [documentation](https://github.com/llaumgui/docker-images-httpd/tree/mai
 
 ## Usage from GitHub Packages
 
-```
+```bash
 docker pull ghcr.io/llaumgui/httpd:latest
 ```
 
@@ -29,7 +28,7 @@ And see [documentation](https://github.com/llaumgui/docker-images-httpd/tree/mai
 [link-twitter]: https://twitter.com/llaumgui
 [ico-docker]: https://img.shields.io/docker/pulls/llaumgui/httpd?color=%2496ed&logo=docker&style=flat-square
 [link-docker]: https://hub.docker.com/r/llaumgui/httpd
-[ico-ghactions]: https://img.shields.io/github/workflow/status/llaumgui/docker-images-httpd/Docker%20Image%20CI?style=flat-square&logo=github&label=CI/CD
+[ico-ghactions]: https://img.shields.io/github/workflow/status/llaumgui/docker-images-httpd/Docker%20image%20CI%20CD?style=flat-square&logo=github&label=CI/CD
 [link-ghactions]: https://github.com/llaumgui/docker-images-httpd/actions
 [ico-version]: https://img.shields.io/docker/v/llaumgui/httpd?sort=semver&color=%2496ed&logo=docker&style=flat-square
 [ico-license]: https://img.shields.io/github/license/llaumgui/docker-images-httpd?style=flat-square

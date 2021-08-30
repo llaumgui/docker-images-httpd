@@ -9,6 +9,7 @@
 An Apache HTTPd 2.4 image forked from offical [repository](https://store.docker.com/images/httpd).
 
 With configuration:
+
 * [Deflate](https://github.com/llaumgui/docker-images/tree/master/httpd/2.4/conf.d/deflate.conf).
 * [ETags](https://github.com/llaumgui/docker-images/tree/master/httpd/2.4/conf.d/etags.conf).
 * [Expires](https://github.com/llaumgui/docker-images/tree/master/httpd/2.4/conf.d/expires.conf).
@@ -17,11 +18,15 @@ With configuration:
 * You can put your vhost in _/usr/local/apache2/conf/vhost.d_ (This directory can be shared with the host).
 
 Work also with
-* [PHP-FPM](https://github.com/llaumgui/docker-images/tree/master/httpd/2.4/conf.d/php.conf) handler toward *php* hostname.
+
+* [PHP-FPM](https://github.com/llaumgui/docker-images/tree/master/httpd/2.4/conf.d/php.conf) handler toward _php_ hostname.
 
 ## Usage
+
 ### With docker client
+
 You can run this container with docker client:
+
 ~~~bash
 docker run -d \
   --volumes /etc/localtime:/etc/localtime:ro \
@@ -34,7 +39,9 @@ docker run -d \
 ~~~
 
 ### With compose
+
 You can use this container in a docker-compose.yml file:
+
 ~~~yaml
   httpd:
     container_name: httpd
@@ -54,7 +61,7 @@ You can use this container in a docker-compose.yml file:
 [link-twitter]: https://twitter.com/llaumgui
 [ico-docker]: https://img.shields.io/docker/pulls/llaumgui/httpd?color=%2496ed&logo=docker&style=flat-square
 [link-docker]: https://hub.docker.com/r/llaumgui/httpd
-[ico-ghactions]: https://img.shields.io/github/workflow/status/llaumgui/docker-images-httpd/Docker%20Image%20CI?style=flat-square&logo=github&label=CI/CD
+[ico-ghactions]: https://img.shields.io/github/workflow/status/llaumgui/docker-images-httpd/Docker%20image%20CI%20CD?style=flat-square&logo=github&label=CI/CD
 [link-ghactions]: https://github.com/llaumgui/docker-images-httpd/actions
 [ico-version]: https://img.shields.io/docker/v/llaumgui/httpd?sort=semver&color=%2496ed&logo=docker&style=flat-square
 [ico-license]: https://img.shields.io/github/license/llaumgui/docker-images-httpd?style=flat-square
