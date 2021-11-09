@@ -14,7 +14,7 @@ Repository with my httpds Dockerfile for my Docker/Podman images.
 docker pull llaumgui/httpd
 ```
 
-And see [documentation](https://github.com/llaumgui/docker-images-httpd/tree/main/8.0).
+And see [documentation](https://github.com/llaumgui/docker-images-httpd/tree/main/2.4).
 
 ## Usage from GitHub Packages
 
@@ -22,7 +22,7 @@ And see [documentation](https://github.com/llaumgui/docker-images-httpd/tree/mai
 docker pull ghcr.io/llaumgui/httpd:latest
 ```
 
-And see [documentation](https://github.com/llaumgui/docker-images-httpd/tree/main/8.0).
+And see [documentation](https://github.com/llaumgui/docker-images-httpd/tree/main/2.4).
 
 [ico-twitter]: https://img.shields.io/static/v1?label=Author&message=llaumgui&color=50ABF1&logo=twitter&style=flat-square
 [link-twitter]: https://twitter.com/llaumgui
