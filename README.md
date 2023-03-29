@@ -28,7 +28,7 @@ And see [documentation](https://github.com/llaumgui/docker-images-httpd/tree/mai
 [link-twitter]: https://twitter.com/llaumgui
 [ico-docker]: https://img.shields.io/docker/pulls/llaumgui/httpd?color=%2496ed&logo=docker&style=flat-square
 [link-docker]: https://hub.docker.com/r/llaumgui/httpd
-[ico-ghactions]: https://img.shields.io/github/workflow/status/llaumgui/docker-images-httpd/Docker%20image%20CI%20CD?style=flat-square&logo=github&label=CI/CD
+[ico-ghactions]: https://img.shields.io/github/actions/workflow/status/llaumgui/docker-images-httpd/docker-image.yml?style=flat-square&logo=github&label=CI/CD
 [link-ghactions]: https://github.com/llaumgui/docker-images-httpd/actions
 [ico-version]: https://img.shields.io/docker/v/llaumgui/httpd?sort=semver&color=%2496ed&logo=docker&style=flat-square
 [ico-license]: https://img.shields.io/github/license/llaumgui/docker-images-httpd?style=flat-square
