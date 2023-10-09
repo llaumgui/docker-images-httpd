@@ -29,7 +29,6 @@ You can run this container with docker client:
 
 ~~~bash
 docker run -d \
-  --volumes /etc/localtime:/etc/localtime:ro \
   --volumes /docker/volumes/www:/var/www \
   --volumes /docker/volumes/httpd24/conf/vhost.d:/usr/local/apache2/conf/vhost.d:ro \
   --volumes /docker/volumes/httpd24/conf/ssl://usr/local/apache2/conf/ssl:ro \
@@ -47,8 +46,9 @@ You can use this container in a docker-compose.yml file:
     container_name: httpd
     image: llaumgui/httpd24
     restart: always
+    environment:
+      TZ: 'Europe/Paris'
     volumes:
-     - /etc/localtime:/etc/localtime:ro
      - /docker/volumes/www:/var/www/
      - /docker/volumes/httpd24/conf/vhost.d:/usr/local/apache2/conf/vhost.d:ro
      - /docker/volumes/httpd24/conf/ssl:/usr/local/apache2/conf/ssl:ro
@@ -57,11 +57,11 @@ You can use this container in a docker-compose.yml file:
      - "443:443"
 ~~~
 
-[ico-twitter]: https://img.shields.io/static/v1?label=Author&message=llaumgui&color=50ABF1&logo=twitter&style=flat-square
+[ico-twitter]: https://img.shields.io/static/v1?label=Author&message=llaumgui&color=000&logo=x&style=flat-squareP
 [link-twitter]: https://twitter.com/llaumgui
 [ico-docker]: https://img.shields.io/docker/pulls/llaumgui/httpd?color=%2496ed&logo=docker&style=flat-square
 [link-docker]: https://hub.docker.com/r/llaumgui/httpd
-[ico-ghactions]: https://img.shields.io/github/workflow/status/llaumgui/docker-images-httpd/Docker%20image%20CI%20CD?style=flat-square&logo=github&label=CI/CD
+[ico-ghactions]: https://img.shields.io/github/actions/workflow/status/llaumgui/docker-images-httpd/devops.yml?style=flat-square&logo=github&label=CI/CD
 [link-ghactions]: https://github.com/llaumgui/docker-images-httpd/actions
 [ico-version]: https://img.shields.io/docker/v/llaumgui/httpd?sort=semver&color=%2496ed&logo=docker&style=flat-square
 [ico-license]: https://img.shields.io/github/license/llaumgui/docker-images-httpd?style=flat-square
