@@ -1,11 +1,9 @@
 name: DevOps
-
 on:
   schedule:
   - cron: '5 5 * * 2'
   push:
   pull_request:
-
 env:
   GHCR_REGISTRY: ghcr.io
   IMAGE_NAME: llaumgui/httpd
@@ -19,19 +17,16 @@ jobs:
   test_dockerfiles:
     runs-on: ubuntu-latest
     name: Linters for Dockerfile
-
     steps:
     - name: Git checkout
       uses: actions/checkout@v4
       with:
         fetch-depth: 0
-
     - name: hadolint
-      if: github.event.schedule == ''
+      if: ${{ github.event.schedule == '' }}
       uses: hadolint/hadolint-action@v3.1.0
       with:
         recursive: true
-
 
   ##############################################################################
   # Several linter tests job
@@ -39,21 +34,17 @@ jobs:
   test_linters:
     runs-on: ubuntu-latest
     name: Linters and checkstyle
-
     steps:
     - name: Git checkout
       uses: actions/checkout@v4
       with:
         fetch-depth: 0
-
     - name: Use markdownlint-cli2
       uses: DavidAnson/markdownlint-cli2-action@v14
       with:
         config: .markdownlint.yaml
-
     - name: Use editorconfig-checker
       uses: editorconfig-checker/action-editorconfig-checker@main
-
 
   ##############################################################################
   # Build and tests job
@@ -61,18 +52,15 @@ jobs:
   build_test:
     runs-on: ubuntu-latest
     name: Build and test docker images
-
     strategy:
       fail-fast: false
       matrix:
         httpd-version: [2.4]
-
     steps:
     - name: Git checkout
       uses: actions/checkout@v4
       with:
         fetch-depth: 0
-
     # Extract metadata (tags, labels) for Docker
     # https://github.com/docker/metadata-action
     - name: Extract Docker metadata
@@ -81,7 +69,6 @@ jobs:
       with:
         images:
           ${{ env.IMAGE_NAME }}
-
     # Build and push Docker image with Buildx (don't push on PR)
     # https://github.com/docker/build-push-action
     - name: Build Docker image
@@ -91,7 +78,6 @@ jobs:
         tags: |
           llaumgui/httpd:${{ matrix.httpd-version }}
         labels: ${{ steps.meta.outputs.labels }}
-
     # Test with Trivy
     # https://github.com/aquasecurity/trivy-action
     - name: Run Trivy vulnerability scanner
@@ -101,18 +87,16 @@ jobs:
         format: 'template'
         template: '@/contrib/sarif.tpl'
         output: 'trivy-results.sarif'
-
     - name: Upload Trivy scan results to GitHub Security tab
       uses: github/codeql-action/upload-sarif@v3
       with:
         sarif_file: 'trivy-results.sarif'
 
-
   ##############################################################################
   # Build and deploy job (only on main)
   #
   build_deploy:
-    if: github.ref == 'refs/heads/main'
+    if: ${{ github.ref == 'refs/heads/main' }}
     needs: [
       test_dockerfiles,
       test_linters,
@@ -120,34 +104,30 @@ jobs:
     ]
     runs-on: ubuntu-latest
     name: Build and deploy docker images
-
     strategy:
       fail-fast: false
       matrix:
         httpd-version: [2.4]
-
     steps:
     - name: Git checkout
       uses: actions/checkout@v4
       with:
         fetch-depth: 0
-
     # Login against 2 Docker registries except on PR
     # https://github.com/docker/login-action
     - name: Log in to Docker Hub
-      if: github.event_name != 'pull_request'
+      if: ${{ github.event_name != 'pull_request' }}
       uses: docker/login-action@v3
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
     - name: Log into registry ${{ env.GHCR_REGISTRY }}
-      if: github.event_name != 'pull_request'
+      if: ${{ github.event_name != 'pull_request' }}
       uses: docker/login-action@v3
       with:
         registry: ${{ env.GHCR_REGISTRY }}
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
-
     # Extract metadata (tags, labels) for Docker
     # https://github.com/docker/metadata-action
     - name: Extract Docker metadata
@@ -157,11 +137,10 @@ jobs:
         images: |
           ${{ env.IMAGE_NAME }}
           ${{ env.GHCR_REGISTRY }}/${{ env.IMAGE_NAME }}
-
     # Build and push Docker image with Buildx (don't push on PR)
     # https://github.com/docker/build-push-action
     - name: Build and push Docker image
-      if: matrix.httpd-version == ${{ env.LATEST }}
+      if: ${{ matrix.httpd-version == env.LATEST }}
       uses: docker/build-push-action@v5
       with:
         context: ${{ matrix.httpd-version }}
@@ -173,7 +152,7 @@ jobs:
           ${{ env.GHCR_REGISTRY }}/${{ env.IMAGE_NAME }}:latest
         labels: ${{ steps.meta.outputs.labels }}
     - name: Build and push Docker image
-      if: matrix.httpd-version != ${{ env.LATEST }}
+      if: ${{ matrix.httpd-version != env.LATEST }}
       uses: docker/build-push-action@v5
       with:
         context: ${{ matrix.httpd-version }}
