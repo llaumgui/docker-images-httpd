@@ -1,0 +1,28 @@
+#!/bin/sh
+set -e
+
+DEFAULT_UID=82
+DEFAULT_GID="${DEFAULT_UID}"
+DEFAULT_NAME="www-data"
+
+# Add group if PGID is different from the default
+if [ "${PGID}" -ne "${DEFAULT_GID}" ]; then
+    addgroup --system --gid "${PGID}" www-docker
+    sed -i 's@Group www-data@Group www-docker@g' /usr/local/apache2/conf/httpd.conf
+fi
+
+# Add user if PUID is different from the default
+if [ "${PUID}" -ne "${DEFAULT_UID}" ]; then
+    adduser --system  --uid "${PUID}" www-docker "$(getent group "${PGID}" | cut -d: -f1)"
+    sed -i 's@User www-data@User www-docker@g' /usr/local/apache2/conf/httpd.conf
+fi
+
+# Change ownership if PUID or PGID differs from the default
+if [ "${PUID}" -ne "${DEFAULT_UID}" ] || [ "${PGID}" -ne "${DEFAULT_GID}" ]; then
+    chown -R "${PUID}:${PGID}" "${HTTPD_PREFIX}"
+fi
+
+# Apache gets grumpy about PID files pre-existing
+rm -f /usr/local/apache2/logs/httpd.pid
+
+exec httpd -DFOREGROUND "$@"

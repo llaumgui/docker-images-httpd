@@ -24,6 +24,10 @@ RUN sed -i 's@^#LoadModule deflate_module modules/mod_deflate.so@LoadModule defl
 # Use 443
 RUN sed -i 's@Listen 80@Listen 80\nListen 443@g' /usr/local/apache2/conf/httpd.conf
 
+# Add PUID / PGUID support
+ENV PUID=82
+ENV PGID=82
+
 # Custom configuration.
 RUN mkdir /usr/local/apache2/conf/conf.d && \
     mkdir /usr/local/apache2/conf/vhost.d && \
@@ -32,4 +36,8 @@ RUN mkdir /usr/local/apache2/conf/conf.d && \
 COPY conf.d /usr/local/apache2/conf/conf.d
 
 EXPOSE 443
+
+# Override CMD for PUID / PGUID support
+COPY --chmod=755 httpd-foreground /usr/local/bin/
+
 WORKDIR /var/www

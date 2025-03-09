@@ -1,12 +1,11 @@
 # Alpine Apache HTTPd 2.4
 
-[![Author][ico-twitter]][link-twitter]
 [![Build Status][ico-ghactions]][link-ghactions]
 [![Docker Pull][ico-docker]][link-docker]
 [![Latest Version][ico-version]][link-docker]
 [![Software License][ico-license]](LICENSE)
 
-An Apache HTTPd 2.4 image forked from offical [repository](https://store.docker.com/images/httpd).
+An Apache HTTPd 2.4 image forked from the official [repository](https://store.docker.com/images/httpd).
 
 With configuration:
 
@@ -15,17 +14,18 @@ With configuration:
 * [Expires](https://github.com/llaumgui/docker-images/tree/master/httpd/2.4/conf.d/expires.conf).
 * [Security](https://github.com/llaumgui/docker-images/tree/master/httpd/2.4/conf.d/security.conf).
 * SSL support.
-* You can put your vhost in _/usr/local/apache2/conf/vhost.d_ (This directory can be shared with the host).
+* You can put your vhost in _/usr/local/apache2/conf/vhost.d_ (This directory can be shared with the Docker host).
+* Allow environment variables `PUID` and `PGID` to change the user which executes the HTTP process.
 
-Work also with
+Works also with
 
-* [PHP-FPM](https://github.com/llaumgui/docker-images/tree/master/httpd/2.4/conf.d/php.conf) handler toward _php_ hostname.
+* [PHP-FPM](https://github.com/llaumgui/docker-images/tree/master/httpd/2.4/conf.d/php.conf) handler toward the _php_ hostname.
 
 ## Usage
 
-### With docker client
+### With Docker client
 
-You can run this container with docker client:
+You can run this container with the Docker client:
 
 ~~~bash
 docker run -d \
@@ -37,7 +37,7 @@ docker run -d \
   llaumgui/httpd24
 ~~~
 
-### With compose
+### With Compose
 
 You can use this container in a docker-compose.yml file:
 
@@ -48,6 +48,8 @@ You can use this container in a docker-compose.yml file:
     restart: always
     environment:
       TZ: 'Europe/Paris'
+      PUID: 82
+      PGID: 82
     volumes:
      - /docker/volumes/www:/var/www/
      - /docker/volumes/httpd24/conf/vhost.d:/usr/local/apache2/conf/vhost.d:ro
@@ -57,8 +59,6 @@ You can use this container in a docker-compose.yml file:
      - "443:443"
 ~~~
 
-[ico-twitter]: https://img.shields.io/static/v1?label=Author&message=llaumgui&color=000&logo=x&style=flat-squareP
-[link-twitter]: https://twitter.com/llaumgui
 [ico-docker]: https://img.shields.io/docker/pulls/llaumgui/httpd?color=%2496ed&logo=docker&style=flat-square
 [link-docker]: https://hub.docker.com/r/llaumgui/httpd
 [ico-ghactions]: https://img.shields.io/github/actions/workflow/status/llaumgui/docker-images-httpd/devops.yml?style=flat-square&logo=github&label=CI/CD
