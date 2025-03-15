@@ -5,7 +5,7 @@
 [![Latest Version][ico-version]][link-docker]
 [![Software License][ico-license]](LICENSE)
 
-Repository with my httpds Dockerfile for my Docker/Podman images.
+Repository with my httpd Dockerfile for my Docker/Podman images.
 
 ## Usage from Docker Hub
 
