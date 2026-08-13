@@ -8,6 +8,9 @@ env:
   GHCR_REGISTRY: ghcr.io
   IMAGE_NAME: llaumgui/httpd
   LATEST: '2.4'
+permissions:
+  security-events: write
+  packages: write
 
 jobs:
 
