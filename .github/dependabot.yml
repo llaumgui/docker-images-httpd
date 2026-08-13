@@ -13,7 +13,7 @@ updates:
     commit-message:
       prefix: "⬆️ [Actions] "
 
-  # Maintain dependencies for npm
+  # Maintain dependencies for docker
   - package-ecosystem: "docker"
     schedule:
       interval: "daily"
